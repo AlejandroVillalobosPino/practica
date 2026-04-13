@@ -1,0 +1,104 @@
+### Variables Iniciales (Se actualizarán solas al ejecutar)
+@baseUrl = http://localhost:3000/api/user
+
+### 1. Registro de usuario
+# @name register
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "email": "test15@u-tad.com",
+  "password": "Password1234"
+}
+
+> {%
+    // Este script guarda el token automáticamente tras el registro
+    client.global.set("token", response.body.accessToken);
+%}
+
+### 2. Validación del email
+PUT {{baseUrl}}/validation
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "code": "287284"
+}
+
+### 3. Login
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "test15@u-tad.com",
+  "password": "Password1234"
+}
+
+> {%
+    // Este script guarda el token y el refresh token tras el login
+    client.global.set("token", response.body.accessToken);
+    client.global.set("refreshToken", response.body.refreshToken);
+%}
+
+### 4. Onboarding: Datos personales
+PUT {{baseUrl}}/register
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Alex",
+  "lastName": "Vara",
+  "nif": "12345678X"
+}
+
+### 4b. Onboarding: Crear Compañía
+PATCH {{baseUrl}}/company
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "U-tad Corp",
+  "cif": "B88888888",
+  "address": {
+    "street": "Playa de las Américas", "number": "1", "postal": "28290", "city": "Las Rozas", "province": "Madrid"
+  },
+  "isFreelance": false
+}
+
+### 5. Logo de la compañía
+PATCH {{baseUrl}}/logo
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="logo"; filename="logo.png"
+Content-Type: image/png
+
+< ./logo.png
+--WebAppBoundary--
+
+### 6. Obtener Perfil (Populate y Virtual)
+GET {{baseUrl}}/
+Authorization: Bearer {{token}}
+
+### 7. Gestión de sesión: Refresh Token
+POST {{baseUrl}}/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### 8. Eliminar usuario (Borrado Lógico)
+DELETE {{baseUrl}}/?soft=true
+Authorization: Bearer {{token}}
+
+### 9. Invitar compañero (Solo Admin)
+POST {{baseUrl}}/invite
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "email": "compañero@u-tad.com"
+}
