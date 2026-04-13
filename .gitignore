@@ -1,1 +1,15 @@
+# Archivos de entorno (Seguridad)
 .env
+.env.local
+
+# Dependencias
+node_modules/
+
+# Archivos subidos por usuarios (Multer)
+uploads/
+
+# Archivos del sistema e IDE
+.DS_Store
+.idea/
+.vscode/
+npm-debug.log*
