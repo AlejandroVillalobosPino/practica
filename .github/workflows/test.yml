@@ -10,6 +10,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      mongodb:
+        image: mongo:6
+        ports:
+          - 27017:27017
+
     steps:
       - uses: actions/checkout@v4
 
@@ -27,6 +33,5 @@ jobs:
           NODE_ENV: test
           JWT_SECRET: testsecretkey32characterslongxx
           JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxx
-          MONGO_URI: mongodb://localhost:27017/test
+          MONGO_URI: mongodb://localhost:27017/testdb
           PORT: 3000
-          NODE_OPTIONS: --max-old-space-size=4096
