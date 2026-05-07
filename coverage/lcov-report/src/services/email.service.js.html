@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/utils/AppError.js</title>
+    <title>Code coverage report for src/services/email.service.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/utils</a> AppError.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/services</a> email.service.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/8</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
@@ -92,65 +92,86 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * Clase personalizada para manejar errores operativos de la aplicación.
- * Permite centralizar el mensaje, el código de estado HTTP y un código de error interno.
- */
-export class AppError extends Error {
-    constructor(message, statusCode, errorCode, details = null) { // Añadimos details
-        super(message);
-        this.statusCode = statusCode;
-        this.errorCode = errorCode;
-        this.details = details; // Guardamos los detalles del error
-        this.isOperational = true;
-        Error.captureStackTrace(this, this.constructor);
-    }
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import nodemailer from 'nodemailer';
 &nbsp;
-    static badRequest(msg, code = 'BAD_REQUEST', details = null) {
-        return new AppError(msg, 400, code, details); // Pasamos details
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
+});
 &nbsp;
-    static unauthorized(msg = <span class="branch-0 cbranch-no" title="branch not covered" >'No autorizado',</span> code = 'UNAUTHORIZED') {
-        return new AppError(msg, 401, code);
-    }
+export const sendVerificationEmail = async (email, code) =&gt; {
+    await transporter.sendMail({
+        from: `"BildyApp" &lt;${process.env.EMAIL_USER}&gt;`,
+        to: email,
+        subject: 'Verifica tu cuenta',
+        html: `
+            &lt;h2&gt;Bienvenido a BildyApp&lt;/h2&gt;
+            &lt;p&gt;Tu código de verificación es:&lt;/p&gt;
+            &lt;h1 style="color: #4F46E5; letter-spacing: 8px;"&gt;${code}&lt;/h1&gt;
+            &lt;p&gt;Este código expira en 24 horas.&lt;/p&gt;
+        `
+    });
+};
 &nbsp;
-    static notFound(msg = <span class="branch-0 cbranch-no" title="branch not covered" >'Recurso no encontrado',</span> code = 'NOT_FOUND') {
-        return new AppError(msg, 404, code);
-    }
-&nbsp;
-    static conflict(msg, code = 'CONFLICT') {
-        return new AppError(msg, 409, code);
-    }
-}</pre></td></tr></table></pre>
+export const sendInvitationEmail = <span class="fstat-no" title="function not covered" >as</span>ync (email, tempPassword) =&gt; {
+<span class="cstat-no" title="statement not covered" >    await transporter.sendMail({</span>
+        from: `"BildyApp" &lt;${process.env.EMAIL_USER}&gt;`,
+        to: email,
+        subject: 'Te han invitado a BildyApp',
+        html: `
+            &lt;h2&gt;Has sido invitado a BildyApp&lt;/h2&gt;
+            &lt;p&gt;Tu contraseña temporal es:&lt;/p&gt;
+            &lt;h3 style="color: #4F46E5;"&gt;${tempPassword}&lt;/h3&gt;
+            &lt;p&gt;Por favor cámbiala tras iniciar sesión.&lt;/p&gt;
+        `
+    });
+};</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

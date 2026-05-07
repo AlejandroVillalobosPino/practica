@@ -1,20 +1,13 @@
-# Usa una versión ligera de Node.js
-FROM node:24-alpine
-
-# Crea el directorio de trabajo
+# Stage 1: dependencias
+FROM node:22-alpine AS deps
 WORKDIR /app
-
-# Copia los archivos de dependencias
 COPY package*.json ./
+RUN npm ci --only=production
 
-# Instala las dependencias
-RUN npm ci
-
-# Copia el resto del código
+# Stage 2: producción
+FROM node:22-alpine AS production
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Expone el puerto de la aplicación
 EXPOSE 3000
-
-# Comando para ejecutar la app en producción
 CMD ["npm", "start"]
