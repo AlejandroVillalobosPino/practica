@@ -10,11 +10,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     services:
       mongodb:
         image: mongo:6
         ports:
           - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ping:1})' --quiet"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -28,11 +36,11 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --forceExit --detectOpenHandles
+        run: npm test
         env:
           NODE_ENV: test
           CI: true
-          JWT_SECRET: testsecretkey32characterslongxx
+          JWT_SECRET: ${{ secrets.JWT_SECRET || 'testsecretkey32characterslongxx' }}
           JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxx
           MONGO_URI: mongodb://localhost:27017/testdb
           PORT: 3000
