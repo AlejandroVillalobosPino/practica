@@ -41,6 +41,6 @@ jobs:
           CI: true
           JWT_SECRET: testsecretkey32characterslongxx
           JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxx
-          MONGO_URI: mongodb://mongodb:27017/testdb
+          MONGO_URI: mongodb://localhost:27017/testdb
           PORT: 3000
           NODE_OPTIONS: "--experimental-vm-modules"
