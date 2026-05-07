@@ -28,9 +28,10 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --forceExit --detectOpenHandles
         env:
           NODE_ENV: test
+          CI: true
           JWT_SECRET: testsecretkey32characterslongxx
           JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxx
           MONGO_URI: mongodb://localhost:27017/testdb
