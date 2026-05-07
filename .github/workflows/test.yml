@@ -10,9 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     services:
       mongodb:
         image: mongo:6
@@ -25,12 +22,14 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -40,7 +39,8 @@ jobs:
         env:
           NODE_ENV: test
           CI: true
-          JWT_SECRET: ${{ secrets.JWT_SECRET || 'testsecretkey32characterslongxx' }}
+          JWT_SECRET: testsecretkey32characterslongxx
           JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxx
-          MONGO_URI: mongodb://localhost:27017/testdb
+          MONGO_URI: mongodb://mongodb:27017/testdb
           PORT: 3000
+          NODE_OPTIONS: "--experimental-vm-modules"
