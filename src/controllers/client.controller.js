@@ -1,15 +1,12 @@
 import Client from '../models/Client.js';
 import { AppError } from '../utils/AppError.js';
-import { emitToCompany } from '../config/socket.js'; // Requisito Fase 4
+import { emitToCompany } from '../config/socket.js';
 
 export const createClient = async (req, res, next) => {
     try {
         const { cif } = req.body;
-
         const existingClient = await Client.findOne({ cif, company: req.user.company });
-        if (existingClient) {
-            return next(AppError.conflict('Ya existe un cliente con este CIF en tu compañía'));
-        }
+        if (existingClient) return next(AppError.conflict('Ya existe un cliente con este CIF en tu compañia'));
 
         const client = await Client.create({
             ...req.body,
@@ -17,9 +14,7 @@ export const createClient = async (req, res, next) => {
             createdBy: req.user.id
         });
 
-        // NOTIFICACIÓN EN TIEMPO REAL
         emitToCompany(req.user.company, 'client:new', client);
-
         res.status(201).json(client);
     } catch (error) { next(error); }
 };
@@ -31,26 +26,14 @@ export const getClients = async (req, res, next) => {
         const skip = (page - 1) * limit;
 
         const query = { company: req.user.company };
-        if (req.query.name) {
-            query.name = { $regex: req.query.name, $options: 'i' };
-        }
+        if (req.query.name) query.name = { $regex: req.query.name, $options: 'i' };
 
         const sort = req.query.sort ? req.query.sort.split(',').join(' ') : '-createdAt';
 
-        const clients = await Client.find(query)
-            .sort(sort)
-            .skip(skip)
-            .limit(limit)
-            .populate('createdBy', 'name email');
-
+        const clients = await Client.find(query).sort(sort).skip(skip).limit(limit);
         const totalItems = await Client.countDocuments(query);
 
-        res.json({
-            data: clients,
-            currentPage: page,
-            totalPages: Math.ceil(totalItems / limit),
-            totalItems
-        });
+        res.json({ data: clients, currentPage: page, totalPages: Math.ceil(totalItems / limit), totalItems });
     } catch (error) { next(error); }
 };
 
@@ -66,7 +49,7 @@ export const updateClient = async (req, res, next) => {
     try {
         const client = await Client.findOneAndUpdate(
             { _id: req.params.id, company: req.user.company },
-            { ...req.body, updatedBy: req.user.id },
+            { ...req.body },
             { new: true, runValidators: true }
         );
         if (!client) return next(AppError.notFound('Cliente no encontrado'));
@@ -80,7 +63,7 @@ export const deleteClient = async (req, res, next) => {
         if (soft === 'true') {
             const client = await Client.findOneAndUpdate(
                 { _id: req.params.id, company: req.user.company },
-                { active: false, updatedBy: req.user.id },
+                { deleted: true },
                 { new: true }
             );
             if (!client) return next(AppError.notFound('Cliente no encontrado'));
@@ -95,7 +78,7 @@ export const deleteClient = async (req, res, next) => {
 
 export const getArchivedClients = async (req, res, next) => {
     try {
-        const clients = await Client.find({ company: req.user.company, active: false });
+        const clients = await Client.find({ company: req.user.company, deleted: true });
         res.json(clients);
     } catch (error) { next(error); }
 };
@@ -103,8 +86,8 @@ export const getArchivedClients = async (req, res, next) => {
 export const restoreClient = async (req, res, next) => {
     try {
         const client = await Client.findOneAndUpdate(
-            { _id: req.params.id, company: req.user.company, active: false },
-            { active: true, updatedBy: req.user.id },
+            { _id: req.params.id, company: req.user.company, deleted: true },
+            { deleted: false },
             { new: true }
         );
         if (!client) return next(AppError.notFound('Cliente archivado no encontrado'));

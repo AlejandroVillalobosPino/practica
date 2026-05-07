@@ -18,7 +18,12 @@ setupSwagger(app);
 
 // --- RUTAS ---
 app.get('/health', (req, res) => {
-    res.json({ status: 'ok', db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
+    res.json({
+        status: 'ok',
+        db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString()
+    });
 });
 
 app.use('/api', indexRoutes);

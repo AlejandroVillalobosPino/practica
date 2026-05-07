@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,16 +98,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,11 +111,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Clase personalizada para manejar errores operativos de la aplicación.
@@ -135,20 +135,20 @@ export class AppError extends Error {
         Error.captureStackTrace(this, this.constructor);
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    st</span>atic badRequest(msg, code = <span class="branch-0 cbranch-no" title="branch not covered" >'BAD_REQUEST',</span> details = <span class="branch-0 cbranch-no" title="branch not covered" >null)</span> {
-<span class="cstat-no" title="statement not covered" >        return new AppError(msg, 400, code, details); </span>// Pasamos details
+    static badRequest(msg, code = 'BAD_REQUEST', details = null) {
+        return new AppError(msg, 400, code, details); // Pasamos details
     }
 &nbsp;
     static unauthorized(msg = <span class="branch-0 cbranch-no" title="branch not covered" >'No autorizado',</span> code = 'UNAUTHORIZED') {
         return new AppError(msg, 401, code);
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    st</span>atic notFound(msg = <span class="branch-0 cbranch-no" title="branch not covered" >'Recurso no encontrado',</span> code = <span class="branch-0 cbranch-no" title="branch not covered" >'NOT_FOUND')</span> {
-<span class="cstat-no" title="statement not covered" >        return new AppError(msg, 404, code);</span>
+    static notFound(msg = <span class="branch-0 cbranch-no" title="branch not covered" >'Recurso no encontrado',</span> code = 'NOT_FOUND') {
+        return new AppError(msg, 404, code);
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    st</span>atic conflict(msg, code = <span class="branch-0 cbranch-no" title="branch not covered" >'CONFLICT')</span> {
-<span class="cstat-no" title="statement not covered" >        return new AppError(msg, 409, code);</span>
+    static conflict(msg, code = 'CONFLICT') {
+        return new AppError(msg, 409, code);
     }
 }</pre></td></tr></table></pre>
 
@@ -157,7 +157,7 @@ export class AppError extends Error {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-07T00:10:58.261Z
+                at 2026-05-07T00:48:40.441Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

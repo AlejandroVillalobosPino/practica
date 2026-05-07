@@ -14,7 +14,7 @@ const router = Router();
  *     tags: [Clientes]
  *     responses:
  *       200:
- *         description: "Operación exitosa"
+ *         description: "Operacion exitosa"
  *   post:
  *     summary: "Crear un nuevo cliente"
  *     tags: [Clientes]
@@ -24,6 +24,9 @@ const router = Router();
  */
 
 router.use(protect);
+
+router.get('/archived', ctrl.getArchivedClients);   // <-- ANTES que /:id
+router.patch('/:id/restore', ctrl.restoreClient);
 
 router.post('/', validate(clientSchema), ctrl.createClient);
 router.get('/', ctrl.getClients);
