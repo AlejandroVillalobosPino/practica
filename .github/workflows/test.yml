@@ -39,7 +39,7 @@ jobs:
         env:
           NODE_ENV: test
           CI: true
-          JWT_SECRET: testsecretkey32characterslongxx
-          JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxx
+          JWT_SECRET: testsecretkey32characterslongxxxxx
+          JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxxxxx
           MONGO_URI: mongodb://localhost:27017/testdb
           PORT: 3000
