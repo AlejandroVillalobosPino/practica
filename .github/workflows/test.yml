@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm ci
@@ -29,3 +29,4 @@ jobs:
           JWT_REFRESH_SECRET: testrefreshsecretkey32charactersxx
           MONGO_URI: mongodb://localhost:27017/test
           PORT: 3000
+          NODE_OPTIONS: --max-old-space-size=4096
