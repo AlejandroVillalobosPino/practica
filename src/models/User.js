@@ -25,7 +25,6 @@ userSchema.virtual('fullName').get(function() {
 });
 
 // Índices recomendados para acelerar consultas frecuentes
-userSchema.index({ email: 1 });
 userSchema.index({ company: 1 });
 userSchema.index({ status: 1 });
 userSchema.index({ role: 1 });
