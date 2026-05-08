@@ -11,7 +11,8 @@ const clientSchema = new Schema({
         postalCode: { type: String },
         province: { type: String }
     },
-    company: { type: Schema.Types.ObjectId, ref: 'Company', required: true }
+    company: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
+    deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
 export default model('Client', clientSchema);

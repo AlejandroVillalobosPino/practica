@@ -9,7 +9,8 @@ const projectSchema = new Schema({
         type: String,
         enum: ['PLANNING', 'ACTIVE', 'COMPLETED', 'ARCHIVED'],
         default: 'PLANNING'
-    }
+    },
+    deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
 export default model('Project', projectSchema);

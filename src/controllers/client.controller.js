@@ -25,7 +25,7 @@ export const getClients = async (req, res, next) => {
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
 
-        const query = { company: req.user.company };
+        const query = { company: req.user.company, deleted: { $ne: true } };
         if (req.query.name) query.name = { $regex: req.query.name, $options: 'i' };
 
         const sort = req.query.sort ? req.query.sort.split(',').join(' ') : '-createdAt';

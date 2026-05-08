@@ -105,4 +105,47 @@ describe('API Clientes', () => {
             .set('Authorization', `Bearer ${token}`);
         expect(res.statusCode).toBe(204);
     });
+
+    it('Ciclo completo: crear, archivar, verificar, restaurar', async () => {
+        // Crear cliente
+        const created = await request(app)
+            .post('/api/client')
+            .set('Authorization', `Bearer ${token}`)
+            .send({
+                name: 'Cliente Ciclo', cif: 'C11111111', email: 'ciclo@test.com',
+                address: { street: 'Calle Ciclo', city: 'Madrid', postalCode: '28001', province: 'Madrid' }
+            });
+        expect(created.statusCode).toBe(201);
+        const id = created.body._id;
+
+        // Archivar
+        const archived = await request(app)
+            .delete(`/api/client/${id}?soft=true`)
+            .set('Authorization', `Bearer ${token}`);
+        expect(archived.statusCode).toBe(200);
+
+        // No aparece en listado normal
+        const list = await request(app)
+            .get('/api/client')
+            .set('Authorization', `Bearer ${token}`);
+        expect(list.body.data.find(c => c._id === id)).toBeUndefined();
+
+        // Si aparece en archivados
+        const archivedList = await request(app)
+            .get('/api/client/archived')
+            .set('Authorization', `Bearer ${token}`);
+        expect(archivedList.body.find(c => c._id === id)).toBeDefined();
+
+        // Restaurar
+        const restored = await request(app)
+            .patch(`/api/client/${id}/restore`)
+            .set('Authorization', `Bearer ${token}`);
+        expect(restored.statusCode).toBe(200);
+
+        // Vuelve a aparecer en listado normal
+        const listAfter = await request(app)
+            .get('/api/client')
+            .set('Authorization', `Bearer ${token}`);
+        expect(listAfter.body.data.find(c => c._id === id)).toBeDefined();
+    });
 });
